@@ -1,8 +1,6 @@
 /*
  * Includes common utility methods and shims
  */
-import {isEmpty} from "../util";
-import {identity} from "../util";
 
 /**
  * Return true if all items in list are strings
@@ -167,12 +165,20 @@ export var snakeCase = function(source) {
   return words.join('_');
 };
 
-export var convertKeys = function(source, converter = identity) {
-  var key, result, value;
+/**
+ * Creates a new object from source, with the keys transformed using the converter.
+ * @param {object} source
+ * @param {function|null} converter
+ * @returns {object}
+ */
+export var convertKeys = function(source, converter) {
+  var result, value;
   result = {};
-  for (key in source) {
+  for (let key in source) {
     value = source[key];
-    key = converter(key);
+    if(converter) {
+      key = converter(key);
+    }
     if (!isEmpty(key)) {
       result[key] = value;
     }
@@ -295,4 +301,32 @@ export function optionConsume(options, option_name, default_value) {
   } else {
     return default_value;
   }
+}
+
+/**
+ * Returns true if the value is empty<br>
+ *
+ * @param {*} value
+ * @returns {boolean} true if value is empty
+ */
+export function isEmpty(value) {
+  if(value == null) {
+    return true;
+  }
+  if( typeof value.length == "number") {
+    return value.length === 0;
+  }
+  if( typeof value.size == "number") {
+    return value.size === 0;
+  }
+  if(typeof value == "object") {
+    for(let key in value) {
+      if(value.hasOwnProperty(key)) {
+        return false;
+      }
+    }
+    return true;
+  }
+  console.log("nothing matched", value);
+  return true;
 }
