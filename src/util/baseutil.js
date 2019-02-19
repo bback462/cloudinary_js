@@ -1,7 +1,6 @@
 /*
  * Includes common utility methods and shims
  */
-import {isString} from "../util";
 import {isEmpty} from "../util";
 import {identity} from "../util";
 
@@ -11,7 +10,7 @@ import {identity} from "../util";
  * @param {Array} list - an array of items
  */
 export var allStrings = function(list) {
-  return list.length && list.every(isString);
+  return list.length && list.every(value => typeof value === 'string');
 };
 
 /**
