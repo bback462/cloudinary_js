@@ -93,7 +93,7 @@ function cloudinaryUrlPrefix(publicId, options) {
  * @ignore
  */
 function finalizeResourceType(resourceType = "image", type = "upload", urlSuffix, useRootPath, shorten) {
-  var key, options;
+  var options;
   if (isPlainObject(resourceType)) {
     options = resourceType;
     resourceType = options.resource_type;
@@ -109,14 +109,7 @@ function finalizeResourceType(resourceType = "image", type = "upload", urlSuffix
     resourceType = SEO_TYPES[`${resourceType}/${type}`];
     type = null;
     if (resourceType == null) {
-      throw new Error(`URL Suffix only supported for ${((function () {
-        var results;
-        results = [];
-        for (key in SEO_TYPES) {
-          results.push(key);
-        }
-        return results;
-      })()).join(', ')}`);
+      throw new Error(`URL Suffix only supported for ${Object.keys(SEO_TYPES).join(', ')}`);
     }
   }
   if (useRootPath) {

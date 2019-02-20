@@ -278,7 +278,10 @@ export function extractUrlParams(options) {
  * @private
  * @param options url and transformation options. This argument may be changed by the function!
  */
-export function patchFetchFormat(options={}) {
+export function patchFetchFormat(options) {
+  if(options == null) {
+    options = {};
+  }
   if (options.type === "fetch") {
     if (options.fetch_format == null) {
       options.fetch_format = optionConsume(options, "format");

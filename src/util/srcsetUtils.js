@@ -79,7 +79,10 @@ export function generateSrcsetAttribute(public_id, breakpoints, transformation, 
  * @param {number[]} breakpoints An array of breakpoints.
  * @return {string} Resulting sizes attribute value
  */
-export function generateSizesAttribute(breakpoints=[]){
+export function generateSizesAttribute(breakpoints){
+  if(breakpoints == null) {
+    return '';
+  }
   return breakpoints.map(width=>`(max-width: ${width}px) ${width}px`).join(', ');
 }
 
@@ -137,13 +140,15 @@ export function generateImageResponsiveAttributes(publicId, attributes={}, srcse
  * @param {number|string} options.max_width
  * @return {string} a media query string
  */
-export function generateMediaAttr(options={}){
+export function generateMediaAttr(options){
   let mediaQuery = [];
-  if(options.min_width != null){
-    mediaQuery.push(`(min-width: ${options.min_width}px)`);
-  }
-  if(options.max_width != null){
-    mediaQuery.push(`(max-width: ${options.max_width}px)`);
+  if(options != null) {
+    if (options.min_width != null) {
+      mediaQuery.push(`(min-width: ${options.min_width}px)`);
+    }
+    if (options.max_width != null) {
+      mediaQuery.push(`(max-width: ${options.max_width}px)`);
+    }
   }
   return mediaQuery.join(' and ');
 }
