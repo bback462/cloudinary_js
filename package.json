@@ -16,9 +16,6 @@
     "test:pkgs": "for pkg in core jquery jquery-file-upload; do node_modules/.bin/karma start --single-run --cloudinary.pkg=${pkg}; done",
     "test:pkgs:minified": "for pkg in core jquery jquery-file-upload; do node_modules/.bin/karma start --single-run --cloudinary.minified --cloudinary.pkg=${pkg}; done",
     "test:types": "node_modules/.bin/tsc",
-    "pretest": "npm run build",
-    "pretest:pkgs": "npm run build",
-    "pretest:pkgs:minified": "npm run build",
     "copybuilds": "for pkg in core jquery jquery-file-upload; do pkg/copy_deployment ${pkg}; done",
     "verify-pkgs": "jasmine pkg/verify-pkgs.js"
   },
@@ -57,6 +54,7 @@
     "lodash": "^4.17.13",
     "lodash-cli": "^4.15.0",
     "parallel-webpack": "^2.3.0",
+    "puppeteer": "^1.20.0",
     "requirejs": "^2.3.6",
     "tar": "^4.4.10",
     "terser-webpack-plugin": "^1.2.3",

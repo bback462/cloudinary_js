@@ -1,3 +1,5 @@
+process.env.CHROME_BIN = require('puppeteer').executablePath();
+
 function testFiles(pkg) {
   let files = [
     'test/spec/spec-helper.js',
