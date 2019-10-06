@@ -115,7 +115,7 @@ module.exports = function(config) {
     autoWatch: false,
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome', 'Firefox', 'ChromeHeadless'],
+    browsers: [ 'FirefoxHeadless', 'ChromeHeadless'],
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: true,
