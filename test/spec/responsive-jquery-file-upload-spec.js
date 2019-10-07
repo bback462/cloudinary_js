@@ -46,7 +46,7 @@ describeTest('client side responsive', function() {
     });
     beforeEach(function() {
       originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-      jasmine.DEFAULT_TIMEOUT_INTERVAL = 50000;
+      jasmine.DEFAULT_TIMEOUT_INTERVAL = 15000;
       cl = $.cloudinary = new cloudinary.CloudinaryJQuery(defaultConfig);
       fixtureContainer = document.createElement('div');
       fixtureContainer.id = "fixture";
@@ -64,9 +64,6 @@ describeTest('client side responsive', function() {
     };
     it('should traverse up the DOM to find a parent that has clientWidth', function() {
       var aContainer, divContainer, img;
-      aContainer = void 0;
-      divContainer = void 0;
-      img = void 0;
       divContainer = $('<div>').css({
         width: 101
       }).appendTo(fixtureContainer);

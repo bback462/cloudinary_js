@@ -54,9 +54,6 @@ describeTest('client side responsive', function() {
     };
     it('should traverse up the DOM to find a parent that has clientWidth', function() {
       var aContainer, divContainer, img;
-      aContainer = void 0;
-      divContainer = void 0;
-      img = void 0;
       divContainer = document.createElement('div');
       divContainer.style.width = 101;
       fixtureContainer.appendChild(divContainer);
