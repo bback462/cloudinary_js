@@ -4,15 +4,18 @@ topPosition = 0;
 
 cl = null;
 
-describe('client side responsive', function() {
-  var defaultConfig;
-  if (/phantom|HeadlessChrome/i.test(navigator.userAgent)) {
-    console.warn("Skipping responsive tests in PhantomJS or HeadlessChrome");
-    return;
-  }
-  defaultConfig = {
+let describeTest = describe;
+
+if (/phantom|HeadlessChrome|HeadlessFirefox/i.test(navigator.userAgent)) {
+  console.warn("Skipping responsive tests in PhantomJS or HeadlessChrome");
+  describeTest = xdescribe;
+}
+
+describeTest('client side responsive', function() {
+  let defaultConfig = {
     cloud_name: 'sdk-test'
   };
+
   return describe("responsive", function() {
     var container, fixtureContainer, handler, originalTimeout, testDocument, testWindow, triggerResize;
     fixtureContainer = void 0;

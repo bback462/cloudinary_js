@@ -4,13 +4,15 @@ topPosition = 0;
 
 cl = null;
 
-describe('client side responsive', function() {
-  var defaultConfig;
-  if (/phantom|HeadlessChrome/i.test(navigator.userAgent)) {
-    console.warn("Skipping responsive tests in PhantomJS or HeadlessChrome");
-    return;
-  }
-  defaultConfig = {
+let describeTest = describe;
+
+if (/phantom|HeadlessChrome|HeadlessFirefox/i.test(navigator.userAgent)) {
+  console.warn("Skipping responsive tests in PhantomJS or HeadlessChrome");
+  describeTest = xdescribe;
+}
+
+describeTest('client side responsive', function() {
+  let defaultConfig = {
     cloud_name: 'sdk-test'
   };
   return describe("responsive", function() {
@@ -44,7 +46,7 @@ describe('client side responsive', function() {
     });
     beforeEach(function() {
       originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-      jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+      jasmine.DEFAULT_TIMEOUT_INTERVAL = 50000;
       cl = $.cloudinary = new cloudinary.CloudinaryJQuery(defaultConfig);
       fixtureContainer = document.createElement('div');
       fixtureContainer.id = "fixture";
