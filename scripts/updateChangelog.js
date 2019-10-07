@@ -1,8 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 const prepend = require('prepend');
-const SUCCESS_COLOR = "\x1b[32m"; // Green
-const ERROR_COLOR = "\x1b[31m"; // Red
+const {SUCCESS_COLOR, ERROR_COLOR} = require('./colors');
+
+// TODO: get date from now(), version from package.json, NEXT_VERSION_CHANGES should not include version and date
 
 /**
  * Append NEXT_VERSION_CHANGES.md to start of CHANGELOG.md
@@ -16,7 +17,7 @@ try {
 
   // Throw if no changes
   if (!changes) {
-    throw(new Error(`${nextChanges} is empty`));
+    throw(new Error(`${nextChangesFile} is empty`));
   }
 
   // Append latest changes to start of CHANGELOG.md

@@ -18,6 +18,7 @@
     "test:types": "node_modules/.bin/tsc",
     "copybuilds": "for pkg in core jquery jquery-file-upload; do pkg/copy_deployment ${pkg}; done",
     "update-changelog": "node scripts/updateChangelog.js",
+    "update-version": "node scripts/updateVersion.js",
     "verify-pkgs": "jasmine pkg/verify-pkgs.js"
   },
   "repository": {
