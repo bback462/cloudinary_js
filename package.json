@@ -11,15 +11,24 @@
   ],
   "scripts": {
     "build": "node_modules/.bin/parallel-webpack",
+    "build:prerelease": "npm run doc && npm run build && npm run copybuilds",
+    "copybuilds": "for pkg in core jquery jquery-file-upload; do pkg/copy_deployment ${pkg}; done",
     "doc": "node_modules/.bin/jsdoc -c jsdoc-conf.json",
+
     "test": "node_modules/.bin/karma start --single-run",
     "test:pkgs": "for pkg in core jquery jquery-file-upload; do node_modules/.bin/karma start --single-run --cloudinary.pkg=${pkg}; done",
     "test:pkgs:minified": "for pkg in core jquery jquery-file-upload; do node_modules/.bin/karma start --single-run --cloudinary.minified --cloudinary.pkg=${pkg}; done",
     "test:types": "node_modules/.bin/tsc",
-    "copybuilds": "for pkg in core jquery jquery-file-upload; do pkg/copy_deployment ${pkg}; done",
-    "update-changelog": "node scripts/updateChangelog.js",
-    "update-version": "node scripts/updateVersion.js",
-    "verify-pkgs": "jasmine pkg/verify-pkgs.js"
+    "test:prerelease": "npm run verify-packages && npm run test && npm run test:pkgs && npm run test:pkgs:minified",
+    "verify-pkgs": "jasmine pkg/verify-pkgs.js",
+
+    "update:changelog": "node scripts/updateChangelog.js",
+    "update:version": "node scripts/updateVersion.js",
+    "version-commit": "npm run scripts/commitVersion.js",
+    "publish-to-npm": "npm run scripts/publishPackagesToNpm.js",
+
+    "prerelease": "git pull && npm install && npm run build:prerelease && npm run test:prerelease",
+    "release": "npm run update:version <update_type: patch/minor/major> && npm run update:changelog && npm run prerelease && npm run version-commit && git push && git push --tags && npm run publish-to-npm"
   },
   "repository": {
     "type": "git",
@@ -42,6 +51,7 @@
     "blueimp-file-upload": "^9.29.0",
     "bootstrap": "^4.2.1",
     "clean-webpack-plugin": "^1.0.1",
+    "dateformat": "^3.0.3",
     "jasmine": "^3.4.0",
     "jasmine-core": "^3.4.0",
     "jasmine-spec-reporter": "^4.2.1",
