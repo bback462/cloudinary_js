@@ -17,6 +17,7 @@
     "test:pkgs:minified": "for pkg in core jquery jquery-file-upload; do node_modules/.bin/karma start --single-run --cloudinary.minified --cloudinary.pkg=${pkg}; done",
     "test:types": "node_modules/.bin/tsc",
     "copybuilds": "for pkg in core jquery jquery-file-upload; do pkg/copy_deployment ${pkg}; done",
+    "update-changelog": "node scripts/updateChangelog.js",
     "verify-pkgs": "jasmine pkg/verify-pkgs.js"
   },
   "repository": {
@@ -54,6 +55,7 @@
     "lodash": "^4.17.13",
     "lodash-cli": "^4.15.0",
     "parallel-webpack": "^2.3.0",
+    "prepend": "^1.0.2",
     "puppeteer": "^1.20.0",
     "requirejs": "^2.3.6",
     "tar": "^4.4.10",
