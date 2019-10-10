@@ -1,7 +1,6 @@
 const path = require('path');
 const exec = require('child_process').execSync;
 const printExitResult = require('./printExitResult');
-const {SUCCESS_COLOR, ERROR_COLOR} = require('./colors');
 const VERSION = require('../package').version;
 
 /**
@@ -9,17 +8,17 @@ const VERSION = require('../package').version;
  */
 try {
   const cwd = path.join(__dirname, '..');
-  const commitMessage = `"Version ${VERSION}"`;
-  const command = `git commit -am ${commitMessage} --dry-run`;
+  const command = `git tag ${VERSION} -a --dry-run`;
 
-  // Run git commit -am ${commitMessage}
+  // Run git tag ${VERSION} -a
   exec(command, {cwd});
 
-  console.log(SUCCESS_COLOR, `Added a new commit: ${commitMessage}`);
+  console.log(SUCCESS_COLOR, `Added a new tag: ${VERSION}`);
 } catch (error) {
   process.on('exit', code => {
-    printExitResult(code, error, "commitVersion");
+    printExitResult(code, error, "gitTag");
   });
+
   // Exit with status 1 so Jenkins can recognize the error
   process.exit(1);
 }

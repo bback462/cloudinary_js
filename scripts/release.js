@@ -1,26 +1,32 @@
-const exec = require('child_process').execSync;
-try {
-  exec("git pull");
-  exec("npm install");
-}
-catch (e) {
-  console.error(e.message);
-  exit(1);
-}
+// Pull Changes
+git pull
+npm install
 
-pull
-install
-build
-test
+// Build
+npm run build
+npm run copybuilds
 
-update version
-update changelog
-doc
-build
-copy
-verify packages
-test+test/pkg
+//test
+npm run test
 
-tag
-push
-publish
+// Update Version
+npm run update:version <update_type: patch/minor/major>.
+
+//update changelog
+npm run update:changelog <changes>.
+
+//rebuild and test
+npm run build
+npm run copybuilds
+npm run verify-pkgs
+npm run test
+npm run test:pkgs
+npm run:test:pkgs:minified
+
+//commit
+npm run version-commit
+git tag <VERSION> -a
+
+git push
+git push --tags
+npm run publish-to-npm
